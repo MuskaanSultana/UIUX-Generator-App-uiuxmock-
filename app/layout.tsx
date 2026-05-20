@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Nunito_Sans } from "next/font/google";
 import "./globals.css";
+import {ClerkProvider} from '@clerk/nextjs'
+import AppProvider from './provider'
 
 const appFont= Nunito_Sans({
   subsets:['latin']
@@ -19,12 +21,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body
         className={appFont.className}
       >
-        {children}
+        <AppProvider>
+          {children}
+        </AppProvider>
+        
       </body>
     </html>
+    </ClerkProvider>
   );
 }
